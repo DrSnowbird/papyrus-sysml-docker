@@ -29,15 +29,11 @@ Image is pulling from openkbs/papyrus-sysml-docker
 ```
 
 ## Build (Older Eclipse, e.g. Oxygen)
-* Way-1: Modify the line in Dockefile as below if you use Docker-compose or Openshift CI/CD. That is, you se this way if you are not using command line ./build.sh to build container image.
-```
 ## -- Eclipse version: oxygen, photon, etc.: -- ##
-Currently, we only verify the Oxygen Modeling for SysML in Eclipse. We will build Photon later.
-
+Currently, we only verify the Oxygen Modeling for SysML in Eclipse. We will build Photon later when they are available.
 
 # Configurations (Optional)
 If you run "./run.sh" instead of "docker-compose up", you don't have to do anything as below.
-
 * The container uses a default "/workspace" folder. 
 * The script "./run.sh" will re-use or create the local folder in your $HOME directory with the path below to map into the docker's internal "/workspace" folder.
 ```
