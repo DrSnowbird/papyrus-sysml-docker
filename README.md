@@ -1,7 +1,7 @@
-# eclipse-photon-docker
+# Eclipse SysML Modeling Docker
 [![](https://images.microbadger.com/badges/image/openkbs/papyrus-sysml-docker.svg)](https://microbadger.com/images/openkbs/papyrus-sysml-docker "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/papyrus-sysml-docker.svg)](https://microbadger.com/images/openkbs/papyrus-sysml-docker "Get your own version badge on microbadger.com")
 
-* Eclipse-Photon + Java 8 JDK + Maven 3.5 + Python 3.5 + X11 (display GUI)
+* Eclipse-Oxygen + SysML Modeling + Java 8 JDK + Maven 3.5 + Python 3.5 + X11 (display GUI)
 
 # NOTE: This docker now is providing latest Eclipse Photon instead of Oxygen!!!
 
@@ -10,6 +10,7 @@ By using this image, you agree the [Oracle Java JDK License](http://www.oracle.c
 This image contains [Oracle JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). You must accept the [Oracle Binary Code License Agreement for Java SE](http://www.oracle.com/technetwork/java/javase/terms/license/index.html) to use this image.
 
 # Components
+* Eclipse-Oxygen + SysML modeling Framework
 * java version "1.8.0_181"
   Java(TM) SE Runtime Environment (build 1.8.0_181-b13)
   Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
@@ -25,9 +26,6 @@ Image is pulling from openkbs/papyrus-sysml-docker
 ```
 
 # Build
-You can build your own image locally.
-Note that the default build docker is "photon" version. 
-If you want to build older Eclipse like "oxygen", you can following instruction in next section
 ```
 ./build.sh
 ```
@@ -36,13 +34,8 @@ If you want to build older Eclipse like "oxygen", you can following instruction 
 * Way-1: Modify the line in Dockefile as below if you use Docker-compose or Openshift CI/CD. That is, you se this way if you are not using command line ./build.sh to build container image.
 ```
 ## -- Eclipse version: oxygen, photon, etc.: -- ##
-ENV ECLIPSE_VERSION=${ECLIPSE_VERSION:-oxygen}
-```
-* Way-2: If you use command line "./build.sh", you can modify "./docker.env" file and then, run "./build.sh" to build image
-```
-## -- Eclipse version: oxygen, photon, etc.: -- ##
-ECLIPSE_VERSION=photon
-```
+Currently, we only verify the Oxygen Modeling for SysML in Eclipse. We will build Photon later.
+
 
 # Configurations (Optional)
 If you run "./run.sh" instead of "docker-compose up", you don't have to do anything as below.
@@ -56,6 +49,7 @@ The above configuration will ensure all your projects created in the container's
 
 # Other docker-based IDE
 * [openkbs/papyrus-sysml-docker](https://hub.docker.com/r/openkbs/papyrus-sysml-docker/)
+* [openkbs/eclipse-photon-docker](https://hub.docker.com/r/openkbs/eclipse-photon-docker/)
 * [openkbs/netbeans](https://hub.docker.com/r/openkbs/netbeans/)
 * [openkbs/scala-ide-docker](https://hub.docker.com/r/openkbs/scala-ide-docker/)
 * [openkbs/pycharm-docker](https://hub.docker.com/r/openkbs/pycharm-docker/)
