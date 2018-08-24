@@ -14,7 +14,8 @@ ENV ECLIPSE_WORKSPACE=${HOME}/eclipse-workspace
 ## ----------------------------------------------------------------------------
 
 ## -- 1.) Eclipse version: oxygen, photon, etc.: -- ##
-ARG ECLIPSE_VERSION=${ECLIPSE_VERSION:-oxygen}
+ARG ECLIPSE_VERSION=${ECLIPSE_VERSION:-photon}
+#ARG ECLIPSE_VERSION=${ECLIPSE_VERSION:-oxygen}
 ENV ECLIPSE_VERSION=${ECLIPSE_VERSION}
 
 ## -- 2.) Eclipse Type: -- ##
@@ -27,7 +28,6 @@ ARG ECLIPSE_RELEASE=${ECLIPSE_RELEASE:-2}
 
 ## -- 5.) Eclipse Download Mirror site: -- ##
 
-#http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/photon/R/eclipse-jee-photon-R-win32-x86_64.zip
 #http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/photon/R/eclipse-jee-photon-R-win32-x86_64.zip
 #http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/photon/R/eclipse-jee-photon-R-win32.zip
 #http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/photon/R/eclipse-jee-photon-R-linux-gtk-x86_64.tar.gz
@@ -56,13 +56,10 @@ ARG ECLIPSE_DOWNLOAD_ROUTE=${ECLIPSE_DOWNLOAD_ROUTE:-pub/eclipse/technology/epp/
 ## e.g.: http://mirror.math.princeton.edu/pub/eclipse/technology/epp/downloads/release/oxygen/R/
 ARG ECLIPSE_DOWNLOAD_URL=${ECLIPSE_DOWNLOAD_URL:-${ECLIPSE_MIRROR_SITE_URL}/${ECLIPSE_DOWNLOAD_ROUTE}}
 
-## http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/photon/R/eclipse-jee-photon-R-win32-x86_64.zip
 ## http://ftp.osuosl.org/pub/eclipse/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-linux-gtk-x86_64.tar.gz
-## http://mirror.math.princeton.edu/pub/eclipse//technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-linux-gtk-x86_64.tar.gz
 ## http://mirror.math.princeton.edu/pub/eclipse//technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-linux-gtk-x86_64.tar.gz
 ## http://mirror.math.princeton.edu/pub/eclipse//technology/epp/downloads/release/photon/R/eclipse-modeling-photon-R-linux-gtk-x86_64.tar.gz
 WORKDIR /opt
-#RUN sudo wget -c http://mirror.math.princeton.edu/pub/eclipse//technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-linux-gtk-x86_64.tar.gz  && \
 RUN sudo wget -c ${ECLIPSE_DOWNLOAD_URL}/${ECLIPSE_TAR} && \
     sudo tar xvf ${ECLIPSE_TAR} && \
     sudo rm ${ECLIPSE_TAR} 
@@ -90,3 +87,4 @@ RUN mkdir -p ${HOME}/.eclipse ${ECLIPSE_WORKSPACE} &&\
 USER ${USER_NAME}
 WORKDIR ${ECLIPSE_WORKSPACE}
 CMD ["/opt/eclipse/eclipse"]
+
