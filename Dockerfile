@@ -14,8 +14,8 @@ ENV ECLIPSE_WORKSPACE=${HOME}/eclipse-workspace
 ## ----------------------------------------------------------------------------
 
 ## -- 1.) Eclipse version: oxygen, photon, etc.: -- ##
-ARG ECLIPSE_VERSION=${ECLIPSE_VERSION:-photon}
-#ARG ECLIPSE_VERSION=${ECLIPSE_VERSION:-oxygen}
+#ARG ECLIPSE_VERSION=${ECLIPSE_VERSION:-photon}
+ARG ECLIPSE_VERSION=${ECLIPSE_VERSION:-oxygen}
 ENV ECLIPSE_VERSION=${ECLIPSE_VERSION}
 
 ## -- 2.) Eclipse Type: -- ##
