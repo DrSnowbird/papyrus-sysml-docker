@@ -2,6 +2,20 @@ FROM openkbs/jdk-mvn-py3-x11
 
 MAINTAINER DrSnowbird "DrSnowbird@openkbs.org"
 
+# Build-time metadata as defined at http://label-schema.org
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
+LABEL org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.name="e.g. Example project name" \
+      org.label-schema.description="Papyrun SysML Modeling Frameowkr in Eclipse Oxygen" \
+      org.label-schema.url="https://hub.docker.com/r/openkbs/papyrus-sysml-docker/" \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.vcs-url="https://github.com/DrSnowbird/papyrus-sysml-docker" \
+      org.label-schema.vendor="openkbs.org" \
+      org.label-schema.version=$VERSION \
+      org.label-schema.schema-version="1.0"
+          
 ## -------------------------------------------------------------------------------
 ## ---- USER_NAME is defined in parent image: openkbs/jdk-mvn-py3-x11 already ----
 ## -------------------------------------------------------------------------------
