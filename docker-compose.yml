@@ -3,7 +3,8 @@ services:
   papyrus-sysml-docker:
     image: openkbs/papyrus-sysml-docker
     build:
-      context: ./Dockerfile
+      context: .
+      dockerfile: Dockerfile
     container_name: papyrus-sysml-docker
     environment:
       - USER_ID=${USER_ID:-1000}
