@@ -9,30 +9,27 @@ ENV USER_NAME=${USER_NAME:-developer}
 ENV HOME=/home/${USER_NAME}
 ENV ECLIPSE_WORKSPACE=${HOME}/eclipse-workspace
 
-
+ARG BUILD_YEAR_MONTH=2020-12
+ARG BUILD_VERSION=5.0.0
 ## ----------------------------------------------------------------------------------- ##
 ## ----------------------------------------------------------------------------------- ##
 ## ----------- Don't change below unless Eclipse download system change -------------- ##
 ## ----------------------------------------------------------------------------------- ##
 ## ----------------------------------------------------------------------------------- ##
 
-ARG ECLIPSE_DOWNLOAD_URL=https://mirrors.xmission.com/eclipse/modeling/mdt/papyrus/rcp/2020-12/5.0.0/papyrus-2020-12-5.0.0-linux64.tar.gz
+#ARG ECLIPSE_DOWNLOAD_URL=https://mirrors.xmission.com/eclipse/modeling/mdt/papyrus/rcp/2020-12/5.0.0/papyrus-2020-12-5.0.0-linux64.tar.gz
+ARG ECLIPSE_DOWNLOAD_URL=https://mirrors.xmission.com/eclipse/modeling/mdt/papyrus/rcp/${BUILD_YEAR_MONTH}/${BUILD_VERSION}/papyrus-${BUILD_YEAR_MONTH}-${BUILD_VERSION}-linux64.tar.gz
 
-WORKDIR /opt
+WORKDIR ${HOME}
 RUN sudo wget -c ${ECLIPSE_DOWNLOAD_URL} && \
     sudo tar xvf $(basename ${ECLIPSE_DOWNLOAD_URL}) && \
     sudo rm $(basename ${ECLIPSE_DOWNLOAD_URL})
 
-#################################
-#### Install Eclipse Plugins ####
-#################################
-#http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/oxygen
-
-#Install ATL, Accelo and Papyrus Plugins
-#RUN cd /opt/eclipse && \
-#    ./eclipse -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/${ECLIPSE_VERSION}/ -installIU org.eclipse.acceleo.feature.group -nosplash && \
-#    ./eclipse -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/${ECLIPSE_VERSION}/ -installIU org.eclipse.m2m.atl.feature.group -nosplash && \
-#    ./eclipse -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/${ECLIPSE_VERSION},http://download.eclipse.org/modeling/mdt/papyrus/components/bpmn/${ECLIPSE_VERSION},http://download.eclipse.org/modeling/mdt/papyrus/components/sysml14/${ECLIPSE_VERSION},http://download.eclipse.org/releases/${ECLIPSE_VERSION} -installIU org.eclipse.papyrus.sdk.feature.feature.group,org.eclipse.papyrus.toolsmiths.feature.feature.group,org.eclipse.papyrus.sysml14.feature.feature.group,org.eclipse.papyrus.bpmn.feature.feature.group -nosplash
+###########################################
+#### ---- entrypoint script setup ---- ####
+###########################################
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+#RUN chmod +x /docker-entrypoint.sh
 
 ##################################
 #### Set up user environments ####
@@ -45,5 +42,7 @@ RUN mkdir -p ${HOME}/.eclipse ${ECLIPSE_WORKSPACE} &&\
     
 USER ${USER_NAME}
 WORKDIR ${ECLIPSE_WORKSPACE}
-CMD ["/opt/Papyrus/papyrus"]
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["/bin/bash", "-c", "${HOME}/Papyrus/papyrus"]
 
