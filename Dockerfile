@@ -5,9 +5,9 @@ MAINTAINER DrSnowbird "DrSnowbird@openkbs.org"
 ## -------------------------------------------------------------------------------
 ## ---- USER_NAME is defined in parent image: openkbs/jdk-mvn-py3-x11 already ----
 ## -------------------------------------------------------------------------------
-ENV USER_NAME=${USER_NAME:-developer}
-ENV HOME=/home/${USER_NAME}
-ENV ECLIPSE_WORKSPACE=${HOME}/eclipse-workspace
+#ENV USER_NAME=${USER_NAME:-developer}
+#ENV HOME=/home/${USER_NAME}
+#ENV ECLIPSE_WORKSPACE=${HOME}/eclipse-workspace
 
 ARG BUILD_YEAR_MONTH=2020-12
 ARG BUILD_VERSION=5.0.0
@@ -34,14 +34,14 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 ##################################
 #### Set up user environments ####
 ##################################
-VOLUME ${ECLIPSE_WORKSPACE}
-VOLUME ${HOME}/.eclipse 
+#VOLUME ${ECLIPSE_WORKSPACE}
+#VOLUME ${HOME}/.eclipse 
 
-RUN mkdir -p ${HOME}/.eclipse ${ECLIPSE_WORKSPACE} &&\
-    sudo chown -R ${USER_NAME}:${USER_NAME} ${ECLIPSE_WORKSPACE} ${HOME}/.eclipse
+#RUN mkdir -p ${HOME}/.eclipse ${ECLIPSE_WORKSPACE} && \
+#    sudo chown -R ${USER}:${USER} ${HOME} 
     
-USER ${USER_NAME}
-WORKDIR ${ECLIPSE_WORKSPACE}
+USER ${USER}
+WORKDIR ${HOME}
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/bin/bash", "-c", "${HOME}/Papyrus/papyrus"]

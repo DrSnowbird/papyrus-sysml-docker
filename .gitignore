@@ -24,3 +24,9 @@ hs_err_pid*
 
 **tmp
 **copy**
+
+.eclipse/*
+!.eclipse/.dummy.txt
+
+eclipse-workspace/*
+!eclipse-workspace/.dummy.txt
